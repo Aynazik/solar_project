@@ -49,13 +49,13 @@ def parse_star_parameters(line, star: Star):
     **star** — объект звезды.
     """
     tmp_arr = line.split()
-    star.R = tmp_arr[1]
+    star.R = float(tmp_arr[1])
     star.color = tmp_arr[2]
-    star.m = tmp_arr[3]
-    star.x = tmp_arr[4]
-    star.y = tmp_arr[5]
-    star.Vx = tmp_arr[6]
-    star.Vy = tmp_arr[7]
+    star.m = float(tmp_arr[3])
+    star.x = float(tmp_arr[4])
+    star.y = float(tmp_arr[5])
+    star.Vx = float(tmp_arr[6])
+    star.Vy = float(tmp_arr[7])
 
 
 def parse_planet_parameters(line, planet: Planet):
@@ -74,13 +74,13 @@ def parse_planet_parameters(line, planet: Planet):
     **planet** — объект планеты.
     """
     tmp_arr = line.split()
-    planet.R = tmp_arr[1]
+    planet.R = float(tmp_arr[1])
     planet.color = tmp_arr[2]
-    planet.m = tmp_arr[3]
-    planet.x = tmp_arr[4]
-    planet.y = tmp_arr[5]
-    planet.Vx = tmp_arr[6]
-    planet.Vy = tmp_arr[7]
+    planet.m = float(tmp_arr[3])
+    planet.x = float(tmp_arr[4])
+    planet.y = float(tmp_arr[5])
+    planet.Vx = float(tmp_arr[6])
+    planet.Vy = float(tmp_arr[7])
 
 
 def write_space_objects_data_to_file(output_filename, space_objects):
@@ -96,7 +96,6 @@ def write_space_objects_data_to_file(output_filename, space_objects):
     """
     with open(output_filename, 'w') as out_file:
         for obj in space_objects:
-
             print(out_file, "%s %d %s %f" % ('1', 2, '3', 4.5))
             # FIXME: should store real values
 
