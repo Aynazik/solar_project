@@ -101,7 +101,7 @@ class Model:
     def open_file_dialog(self):
         """Открывает диалоговое окно выбора имени файла и вызывает
         функцию считывания параметров системы небесных тел из данного файла.
-        Считанные объекты сохраняются в глобальный список space_objects
+        Считанные объекты сохраняются в список space_objects
         """
         self.perform_execution = False
         for obj in self.space_objects:
@@ -120,12 +120,11 @@ class Model:
                 raise AssertionError()
 
     def save_file_dialog(self):
-        """Открывает диалоговое окно выбора имени файла и вызывает
-        функцию считывания параметров системы небесных тел из данного файла.
-        Считанные объекты сохраняются в глобальный список space_objects
+        """Открывает диалоговое окно для создания файла с текущими параметрами
+        небесных тел и вызывает функцию записи этих параметров в созданный файл.
         """
         out_filename = asksaveasfilename(filetypes=(("Text file", ".txt"),))
         write_space_objects_data_to_file(out_filename, self.space_objects)
 
 
-system = Model()
+g = Model()

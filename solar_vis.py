@@ -12,7 +12,7 @@ header_font = "Arial-16"
 window_width = 800
 """Ширина окна"""
 
-window_height = 720
+window_height = 500
 """Высота окна"""
 
 """Масштабирование экранных координат по отношению к физическим.
@@ -22,7 +22,7 @@ window_height = 720
 
 def calculate_scale_factor(max_distance):
     """Вычисляет значение глобальной переменной **scale_factor** по данной характерной длине"""
-    scale_factor = 0.4*min(window_height, window_width)/max_distance
+    scale_factor = 0.4 * min(window_height, window_width) / max_distance
     print('Scale factor:', scale_factor)
     return scale_factor
 
@@ -38,7 +38,7 @@ def scale_x(x, scale_factor):
     **x** — x-координата модели.
     """
 
-    return int(x*scale_factor) + window_width//2
+    return int(x * scale_factor) + window_width // 2
 
 
 def scale_y(y, scale_factor):
@@ -53,7 +53,7 @@ def scale_y(y, scale_factor):
     **y** — y-координата модели.
     """
 
-    return int(y*scale_factor) + window_height//2
+    return int(y * scale_factor) + window_height // 2
 
 
 def create_star_image(space, star, scale_factor):
@@ -110,7 +110,7 @@ def update_object_position(space, body, scale_factor):
     r = body.R
     if x + r < 0 or x - r > window_width or y + r < 0 or y - r > window_height:
         space.coords(body.image, window_width + r, window_height + r,
-                     window_width + 2*r, window_height + 2*r)
+                     window_width + 2 * r, window_height + 2 * r)
     space.coords(body.image, x - r, y - r, x + r, y + r)
 
 
