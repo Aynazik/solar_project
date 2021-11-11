@@ -9,8 +9,9 @@ from solar_model import *
 from solar_vis import *
 
 
-class Game:
+class Model:
     def __init__(self):
+        print('Modelling started!')
         self.perform_execution = False
         """Флаг цикличности выполнения расчёта"""
         self.physical_time = 0
@@ -25,7 +26,10 @@ class Game:
         self.space_objects = []
         """Список космических объектов."""
         self.physical_time = 0
-
+        self.scale_factor = None
+        """Масштабирование экранных координат по отношению к физическим.
+        Тип: float
+        Мера: количество пикселей на один метр."""
         self.root = tkinter.Tk()
         # космическое пространство отображается на холсте типа Canvas
         self.space = tkinter.Canvas(self.root, width=window_width, height=window_height, bg="black")
@@ -57,6 +61,7 @@ class Game:
         self.time_label.pack(side=tkinter.RIGHT)
 
         self.root.mainloop()
+        print('Modelling finished!')
 
     def execution(self):
         """Функция исполнения -- выполняется циклически, вызывая обработку всех небесных тел,
@@ -66,7 +71,7 @@ class Game:
         """
         recalculate_space_objects_positions(self.space_objects, self.time_step.get())
         for body in self.space_objects:
-            update_object_position(self.space, body)
+            update_object_position(self.space, body, self.scale_factor)
         self.physical_time += self.time_step.get()
         self.displayed_time.set("%.1f" % self.physical_time + " seconds gone")
 
@@ -104,13 +109,13 @@ class Game:
         in_filename = askopenfilename(filetypes=(("Text file", ".txt"),))
         self.space_objects = read_space_objects_data_from_file(in_filename)
         max_distance = max([max(abs(obj.x), abs(obj.y)) for obj in self.space_objects])
-        calculate_scale_factor(max_distance)
+        self.scale_factor = calculate_scale_factor(max_distance)
 
         for obj in self.space_objects:
             if obj.type == 'star':
-                create_star_image(self.space, obj)
+                create_star_image(self.space, obj, self.scale_factor)
             elif obj.type == 'planet':
-                create_planet_image(self.space, obj)
+                create_planet_image(self.space, obj, self.scale_factor)
             else:
                 raise AssertionError()
 
@@ -122,18 +127,5 @@ class Game:
         out_filename = asksaveasfilename(filetypes=(("Text file", ".txt"),))
         write_space_objects_data_to_file(out_filename, self.space_objects)
 
-    def main(self):
-        """Главная функция главного модуля.
-        Создаёт объекты графического дизайна библиотеки tkinter: окно, холст, фрейм с кнопками, кнопки.
-        """
 
-        print('Modelling started!')
-        self.physical_time = 0
-
-
-        print('Modelling finished!')
-
-
-g = Game()
-
-
+g = Model()
