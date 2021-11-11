@@ -128,4 +128,4 @@ class Model:
         write_space_objects_data_to_file(out_filename, self.space_objects)
 
 
-g = Model()
+system = Model()

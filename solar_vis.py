@@ -98,7 +98,7 @@ def update_system_name(space, system_name):
 
 
 def update_object_position(space, body, scale_factor):
-    """Перемещает отображаемый объект на холсте.
+    """Перемещает отображаемый объект
 
     Параметры:
 
